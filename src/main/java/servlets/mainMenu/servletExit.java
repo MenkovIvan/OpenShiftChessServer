@@ -1,6 +1,7 @@
-package servlets;
+package servlets.mainMenu;
 
 import database.CheckInformation;
+import database.UpdateInformation;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -10,9 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
-@WebServlet("/api/status")
-public class servletStatus extends HttpServlet {
+@WebServlet("/api/exit")
+public class servletExit extends HttpServlet {
     public void init(ServletConfig servletConfig) {
         try {
             super.init(servletConfig);
@@ -25,36 +27,18 @@ public class servletStatus extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletOutputStream os = resp.getOutputStream();
         String login = req.getParameter("login");
-        System.out.println("login: "+login);
+        System.out.println("login: " + login);
 
-
-        int id =0;
         try {
-            id = CheckInformation.checkLogin(login);
+            UpdateInformation.updateOnline(CheckInformation.nameToId(login),0);
+            UpdateInformation.updateI_Invite(login,-1);
+            UpdateInformation.updateMe_Invite(-1,login);
+            UpdateInformation.updatePlay(login,0);
+            UpdateInformation.updateColor(login,"-1");
+            UpdateInformation.updateMove(login,"-1");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (id>0){
-            System.out.println("Not found player.Player. Try again");
-            os.print(0);
-        }
-        else{
-            System.out.println("player id: "+id);
-            try {
-                if (CheckInformation.checkOnline(login)) {
-                    os.print(1);
-                    System.out.println("Player " + login + " is online");
-                }
-                else  {
-                    os.print(0);
-                    System.out.println("Player " + login + " is not online");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        os.print("0");
     }
-
 }
-
-

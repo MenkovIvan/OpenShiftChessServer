@@ -58,4 +58,28 @@ public class UpdateInformation {
         //System.out.println("updatePlay = " + rowCount + " from " + login);
 
     }
+
+    public static void updateColor(String login, String color) throws SQLException, ClassNotFoundException {
+
+        Connection connection = ConnectionMySQL.getMySQLConnection();
+
+        Statement statement = connection.createStatement();
+
+        String sql = "UPDATE player SET color='" + color + "' WHERE login='" + login + "'";
+
+        int rowCount = statement.executeUpdate(sql);
+
+    }
+
+    public static void updateMove(String login, String move) throws SQLException, ClassNotFoundException {
+
+        Connection connection = ConnectionMySQL.getMySQLConnection();
+
+        Statement statement = connection.createStatement();
+
+        String sql = "UPDATE player SET move='" + move + "' WHERE login='" + login + "'";
+
+        int rowCount = statement.executeUpdate(sql);
+
+    }
 }
