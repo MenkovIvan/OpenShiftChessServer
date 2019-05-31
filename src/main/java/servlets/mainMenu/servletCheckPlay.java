@@ -1,8 +1,8 @@
 package servlets.mainMenu;
 
-import database.CheckInformation;
-import database.GetInformation;
-import database.UpdateInformation;
+import database.player.CheckInfPlayer;
+import database.player.GetInfPlayer;
+import database.player.UpdateInfPlayer;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -32,24 +32,24 @@ public class servletCheckPlay extends HttpServlet {
         //esli u igroka me_invite == 0 togda uznaem s kem igraem i check play u oboix
 
         try {
-            if(GetInformation.getPlay(CheckInformation.nameToId(login)) == 0) {
+            if(GetInfPlayer.getPlay(CheckInfPlayer.nameToId(login)) == 0) {
                 os.print("0");
             }
             else
-            if (GetInformation.getMeInvite(CheckInformation.nameToId(login)) == 0){
-                int id = GetInformation.getIInvite(CheckInformation.nameToId(login));
-                if (GetInformation.getPlay(id) == 1){
-                    UpdateInformation.updateColor(login, "light");
+            if (GetInfPlayer.getMeInvite(CheckInfPlayer.nameToId(login)) == 0){
+                int id = GetInfPlayer.getIInvite(CheckInfPlayer.nameToId(login));
+                if (GetInfPlayer.getPlay(id) == 1){
+                    UpdateInfPlayer.updateColor(login, "light");
                     System.out.println("  " + login);
                     System.out.println("  light");
                     os.print("1");
                 }
                 else os.print("0");
             }
-            else if (GetInformation.getIInvite(CheckInformation.nameToId(login)) == 0){
-                int id = GetInformation.getMeInvite(CheckInformation.nameToId(login));
-                if (GetInformation.getPlay(id) == 1){
-                    UpdateInformation.updateColor(login, "dark");
+            else if (GetInfPlayer.getIInvite(CheckInfPlayer.nameToId(login)) == 0){
+                int id = GetInfPlayer.getMeInvite(CheckInfPlayer.nameToId(login));
+                if (GetInfPlayer.getPlay(id) == 1){
+                    UpdateInfPlayer.updateColor(login, "dark");
                     System.out.println("  " + login);
                     System.out.println("  dark");
                     os.print("1");

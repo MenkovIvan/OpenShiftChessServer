@@ -1,7 +1,7 @@
 package servlets.mainMenu;
 
-import database.CheckInformation;
-import database.GetInformation;
+import database.player.CheckInfPlayer;
+import database.player.GetInfPlayer;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -29,10 +29,10 @@ public class servletCheckInvite extends HttpServlet {
         System.out.println("servletCheckInvite start");
         System.out.println("  prinyl login: " + login);
         try {
-            int id = GetInformation.getMeInvite(CheckInformation.nameToId(login));
+            int id = GetInfPlayer.getMeInvite(CheckInfPlayer.nameToId(login));
 
-            if (id > 0 && GetInformation.getIInvite(CheckInformation.nameToId(login)) == -1 && GetInformation.getMeInvite(id) == -1 ){
-                String temp = CheckInformation.idToName(id);
+            if (id > 0 && GetInfPlayer.getIInvite(CheckInfPlayer.nameToId(login)) == -1 && GetInfPlayer.getMeInvite(id) == -1 ){
+                String temp = CheckInfPlayer.idToName(id);
                 System.out.println("  idddddddddddddddddddddddddddddddddd =  >" + id + "<");
                 os.print(temp);
                 System.out.println("  resssssssssssssssssssssssssssssssssssssssssss = >" + temp + "<");

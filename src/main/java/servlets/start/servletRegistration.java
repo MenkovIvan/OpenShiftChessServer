@@ -1,8 +1,8 @@
 package servlets.start;
 
-import database.AddPlayer;
-import database.CheckInformation;
-import database.UpdateInformation;
+import database.player.AddPlayer;
+import database.player.CheckInfPlayer;
+import database.player.UpdateInfPlayer;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -23,20 +23,20 @@ public class servletRegistration extends HttpServlet {
         System.out.println("password: "+password);
         int id = 0;
         try {
-            id = CheckInformation.checkLogin(login);
+            id = CheckInfPlayer.checkLogin(login);
         } catch (Exception e) {
             e.printStackTrace();
         }
         if (id !=-1) {
             try {
                 AddPlayer.main(login, password);
-                id = CheckInformation.checkPlayer(login, password);
+                id = CheckInfPlayer.checkPlayer(login, password);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         try {
-            UpdateInformation.updateOnline(id, 1);
+            UpdateInfPlayer.updateOnline(id, 1);
         } catch (Exception e) {
             e.printStackTrace();
         }

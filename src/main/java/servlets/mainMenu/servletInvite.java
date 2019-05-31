@@ -1,7 +1,7 @@
 package servlets.mainMenu;
 
-import database.CheckInformation;
-import database.UpdateInformation;
+import database.player.CheckInfPlayer;
+import database.player.UpdateInfPlayer;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -31,12 +31,12 @@ public class servletInvite extends HttpServlet {
         String whoInvite = req.getParameter("whoinvite");
         System.out.println("  prinyl whoinvite: " + whoInvite);
         try {
-            System.out.println(CheckInformation.checkMeInvite(whoInvite));
-            System.out.println(CheckInformation.checkMeInvite(CheckInformation.idToName(id)));
-            if (CheckInformation.checkMeInvite(whoInvite) == 1 && CheckInformation.checkMeInvite(CheckInformation.idToName(id)) == 1) {
+            System.out.println(CheckInfPlayer.checkMeInvite(whoInvite));
+            System.out.println(CheckInfPlayer.checkMeInvite(CheckInfPlayer.idToName(id)));
+            if (CheckInfPlayer.checkMeInvite(whoInvite) == 1 && CheckInfPlayer.checkMeInvite(CheckInfPlayer.idToName(id)) == 1) {
 
-                UpdateInformation.updateMe_Invite(id, whoInvite);
-                UpdateInformation.updateI_Invite(CheckInformation.idToName(id), CheckInformation.nameToId(whoInvite));
+                UpdateInfPlayer.updateMe_Invite(id, whoInvite);
+                UpdateInfPlayer.updateI_Invite(CheckInfPlayer.idToName(id), CheckInfPlayer.nameToId(whoInvite));
                 System.out.println("  res = 1");
                 os.print(1);
 

@@ -1,6 +1,10 @@
 package servlets.game;
 
-import database.UpdateInformation;
+import database.matchlog.GetInfMatchlog;
+import database.matchlog.UpdateInfMatchlog;
+import database.player.CheckInfPlayer;
+import database.player.GetInfPlayer;
+import database.player.UpdateInfPlayer;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -33,7 +37,18 @@ public class servletMove extends HttpServlet {
         System.out.println("  prinyl move: " + move);
 
         try {
-            UpdateInformation.updateMove(login, move);
+            UpdateInfPlayer.updateMove(login, move);
+
+            if (GetInfPlayer.getColor(CheckInfPlayer.nameToId(login)).equals("light")){
+                int id_m = GetInfMatchlog.getLastId(whoPlay,login);
+                String log = GetInfMatchlog.getLastLog(id_m,whoPlay,login);
+                UpdateInfMatchlog.updateLog(id_m,CheckInfPlayer.idToName(CheckInfPlayer.nameToId(whoPlay)),CheckInfPlayer.idToName(CheckInfPlayer.nameToId(login)),log + " " + move);
+            }
+            else {
+                int id_m = GetInfMatchlog.getLastId(login,whoPlay);
+                String log = GetInfMatchlog.getLastLog(id_m,login,whoPlay);
+                UpdateInfMatchlog.updateLog(id_m,CheckInfPlayer.idToName(CheckInfPlayer.nameToId(login)),CheckInfPlayer.idToName(CheckInfPlayer.nameToId(whoPlay)),log + " " + move);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

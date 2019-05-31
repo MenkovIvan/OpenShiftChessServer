@@ -1,8 +1,10 @@
-package database;
+package database.player;
+
+import database.ConnectionMySQL;
 
 import java.sql.*;
 
-public class UpdateInformation {
+public class UpdateInfPlayer {
     public static void updateOnline(int id, int online) throws SQLException, ClassNotFoundException {
 
         Connection connection = ConnectionMySQL.getMySQLConnection();
@@ -82,4 +84,29 @@ public class UpdateInformation {
         int rowCount = statement.executeUpdate(sql);
 
     }
+
+    public static void updateWin(String login) throws SQLException, ClassNotFoundException {
+
+        Connection connection = ConnectionMySQL.getMySQLConnection();
+
+        Statement statement = connection.createStatement();
+
+        String sql = "UPDATE player SET win=win+1 WHERE login='" + login + "'";
+
+        int rowCount = statement.executeUpdate(sql);
+
+    }
+
+    public static void updateLose(String login) throws SQLException, ClassNotFoundException {
+
+        Connection connection = ConnectionMySQL.getMySQLConnection();
+
+        Statement statement = connection.createStatement();
+
+        String sql = "UPDATE player SET lose=lose+1 WHERE login='" + login + "'";
+
+        int rowCount = statement.executeUpdate(sql);
+
+    }
+
 }

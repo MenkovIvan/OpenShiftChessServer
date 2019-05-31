@@ -1,6 +1,7 @@
 package servlets.mainMenu;
 
-import database.CheckInformation;
+import database.player.CheckInfPlayer;
+import database.player.GetInfPlayer;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -30,7 +31,7 @@ public class servletStatus extends HttpServlet {
 
         int id =0;
         try {
-            id = CheckInformation.checkLogin(login);
+            id = CheckInfPlayer.checkLogin(login);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,7 +42,7 @@ public class servletStatus extends HttpServlet {
         else{
             System.out.println("player id: "+id);
             try {
-                if (CheckInformation.checkOnline(login)) {
+                if (GetInfPlayer.getOnline(CheckInfPlayer.nameToId(login)) == 1) {
                     os.print(1);
                     System.out.println("Player " + login + " is online");
                 }

@@ -1,7 +1,7 @@
 package servlets.mainMenu;
 
-import database.CheckInformation;
-import database.UpdateInformation;
+import database.player.CheckInfPlayer;
+import database.player.UpdateInfPlayer;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -33,21 +33,21 @@ public class servletInviteResult extends HttpServlet {
 
         try {
 
-            int who_id = CheckInformation.searchWhoInvite(CheckInformation.nameToId(login));
+            int who_id = CheckInfPlayer.searchWhoInvite(CheckInfPlayer.nameToId(login));
 
             if (result.equals("yes")){
 
-                UpdateInformation.updateI_Invite(login, 0 );
+                UpdateInfPlayer.updateI_Invite(login, 0 );
 
-                UpdateInformation.updateMe_Invite(0,CheckInformation.idToName(who_id));
+                UpdateInfPlayer.updateMe_Invite(0, CheckInfPlayer.idToName(who_id));
             } else if (result.equals("no")){
 
 
-                UpdateInformation.updateMe_Invite(-1, login);
-                UpdateInformation.updateI_Invite(login, -1);
+                UpdateInfPlayer.updateMe_Invite(-1, login);
+                UpdateInfPlayer.updateI_Invite(login, -1);
 
-                UpdateInformation.updateMe_Invite(-1, CheckInformation.idToName(who_id));
-                UpdateInformation.updateI_Invite(CheckInformation.idToName(who_id), -1);
+                UpdateInfPlayer.updateMe_Invite(-1, CheckInfPlayer.idToName(who_id));
+                UpdateInfPlayer.updateI_Invite(CheckInfPlayer.idToName(who_id), -1);
 
             }
         } catch (Exception e) {

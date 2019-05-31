@@ -1,8 +1,8 @@
 package servlets.game;
 
-import database.CheckInformation;
-import database.GetInformation;
-import database.UpdateInformation;
+import database.player.CheckInfPlayer;
+import database.player.GetInfPlayer;
+import database.player.UpdateInfPlayer;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -32,16 +32,16 @@ public class servletCheckMove  extends HttpServlet {
 
 
         try {
-            if( GetInformation.getPlay(CheckInformation.nameToId(login)) == 0 ||  GetInformation.getPlay(CheckInformation.nameToId(whoPlay)) == 0 ) {
+            if( GetInfPlayer.getPlay(CheckInfPlayer.nameToId(login)) == 0 ||  GetInfPlayer.getPlay(CheckInfPlayer.nameToId(whoPlay)) == 0 ) {
                 os.print("-1");
             }
             else
-            if (GetInformation.getMove(CheckInformation.nameToId(whoPlay)).equals("-1")){
+            if (GetInfPlayer.getMove(CheckInfPlayer.nameToId(whoPlay)).equals("-1")){
                 os.print("-1");
             }
             else{
-                String move = GetInformation.getMove(CheckInformation.nameToId(whoPlay));
-                UpdateInformation.updateMove(whoPlay,"-1");
+                String move = GetInfPlayer.getMove(CheckInfPlayer.nameToId(whoPlay));
+                UpdateInfPlayer.updateMove(whoPlay,"-1");
                 os.print(move);
                 System.out.println("servletCheckMove - start");
                 System.out.println("  " + login + " get from " + whoPlay + "  move = " + move);

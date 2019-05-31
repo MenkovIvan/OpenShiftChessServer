@@ -1,11 +1,13 @@
-package database;
+package database.player;
+
+import database.ConnectionMySQL;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class CheckInformation {
+public class CheckInfPlayer {
 
     public static String idToName(int id) throws SQLException, ClassNotFoundException {
 
@@ -51,26 +53,6 @@ public class CheckInformation {
         if (rs.next()) {
             return -1;
         } else return 1;
-
-    }
-
-    public static boolean checkOnline(String searchLogin) throws SQLException, ClassNotFoundException {
-
-        Connection connection = ConnectionMySQL.getMySQLConnection();
-
-        Statement statement = connection.createStatement();
-
-        String sql = "SELECT id FROM player WHERE login = '" + searchLogin + "' AND online=1";
-
-        ResultSet rs = statement.executeQuery(sql);
-
-        if (rs.next()) {
-
-            //System.out.println("Check online = " + rs.getInt("id") + " return true");
-
-            return true;
-
-        } else return false;
 
     }
 

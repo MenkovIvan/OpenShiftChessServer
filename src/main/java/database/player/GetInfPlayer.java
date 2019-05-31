@@ -1,11 +1,13 @@
-package database;
+package database.player;
+
+import database.ConnectionMySQL;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class GetInformation {
+public class GetInfPlayer {
     public static int getMeInvite(int id) throws SQLException, ClassNotFoundException {
 
         Connection connection = ConnectionMySQL.getMySQLConnection();
@@ -100,4 +102,63 @@ public class GetInformation {
 
         } else return "-2";
     }
+
+    public static int getWin(int id) throws SQLException, ClassNotFoundException {
+
+        Connection connection = ConnectionMySQL.getMySQLConnection();
+
+        Statement statement = connection.createStatement();
+
+        String sql = "SELECT win FROM player WHERE id=" + id;
+
+        ResultSet rs = statement.executeQuery(sql);
+
+        if (rs.next()) {
+
+            //System.out.println("getPlay = " + rs.getInt("play"));
+
+            return rs.getInt("win");
+
+        } else return -2;
+    }
+
+    public static int getLose(int id) throws SQLException, ClassNotFoundException {
+
+        Connection connection = ConnectionMySQL.getMySQLConnection();
+
+        Statement statement = connection.createStatement();
+
+        String sql = "SELECT lose FROM player WHERE id=" + id;
+
+        ResultSet rs = statement.executeQuery(sql);
+
+        if (rs.next()) {
+
+            //System.out.println("getPlay = " + rs.getInt("play"));
+
+            return rs.getInt("lose");
+
+        } else return -2;
+    }
+
+    public static int getOnline(int id) throws SQLException, ClassNotFoundException {
+
+        Connection connection = ConnectionMySQL.getMySQLConnection();
+
+        Statement statement = connection.createStatement();
+
+        String sql = "SELECT online FROM player WHERE id=" + id;
+
+        ResultSet rs = statement.executeQuery(sql);
+
+        if (rs.next()) {
+
+            //System.out.println("getPlay = " + rs.getInt("play"));
+
+            return rs.getInt("online");
+
+        } else return -1;
+
+    }
+
 }

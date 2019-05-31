@@ -1,4 +1,6 @@
-package database;
+package database.player;
+
+import database.ConnectionMySQL;
 
 import java.sql.*;
 
@@ -12,8 +14,5 @@ public class AddPlayer {
         String sql = "INSERT INTO player (login, password) VALUES('" + loginPlayer + "', '" + passwordPlayer + "')";
 
         int rowCount = statement.executeUpdate(sql);
-
-        System.out.println("Row Count affected = " + rowCount);
-
     }
 }

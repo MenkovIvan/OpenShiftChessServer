@@ -1,7 +1,7 @@
 package servlets.game;
 
-import database.CheckInformation;
-import database.GetInformation;
+import database.player.CheckInfPlayer;
+import database.player.GetInfPlayer;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/api/checkcolor")
-public class servletCheckColor extends HttpServlet {
+@WebServlet("/api/checkstat")
+public class servletCheckStat extends HttpServlet {
     public void init(ServletConfig servletConfig) {
         try {
             super.init(servletConfig);
@@ -25,18 +25,19 @@ public class servletCheckColor extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletOutputStream os = resp.getOutputStream();
-        System.out.println("servletCheckColor - start");
+        System.out.println("servletCheckStat - start");
         String login = req.getParameter("login");
-        System.out.println("  login: " + login);
+        System.out.println("  prinyl login: " + login);
 
         try {
-            String color = GetInformation.getColor(CheckInformation.nameToId(login));
-            System.out.println("  res = " + color);
-            os.print(color);
+            int win = GetInfPlayer.getWin(CheckInfPlayer.nameToId(login));
+            int lose = GetInfPlayer.getLose(CheckInfPlayer.nameToId(login));
+            os.print(win + " " + lose);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("servletCheckColor - end");
+
+        os.print("0");
+        System.out.println("servletCheckStat - end");
     }
 }
-

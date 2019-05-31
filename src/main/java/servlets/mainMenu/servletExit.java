@@ -1,7 +1,7 @@
 package servlets.mainMenu;
 
-import database.CheckInformation;
-import database.UpdateInformation;
+import database.player.CheckInfPlayer;
+import database.player.UpdateInfPlayer;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet("/api/exit")
 public class servletExit extends HttpServlet {
@@ -30,12 +29,13 @@ public class servletExit extends HttpServlet {
         System.out.println("login: " + login);
 
         try {
-            UpdateInformation.updateOnline(CheckInformation.nameToId(login),0);
-            UpdateInformation.updateI_Invite(login,-1);
-            UpdateInformation.updateMe_Invite(-1,login);
-            UpdateInformation.updatePlay(login,0);
-            UpdateInformation.updateColor(login,"-1");
-            UpdateInformation.updateMove(login,"-1");
+            UpdateInfPlayer.updateOnline(CheckInfPlayer.nameToId(login),0);
+            UpdateInfPlayer.updateI_Invite(login,-1);
+            UpdateInfPlayer.updateMe_Invite(-1,login);
+            UpdateInfPlayer.updatePlay(login,0);
+            UpdateInfPlayer.updateColor(login,"-1");
+            UpdateInfPlayer.updateMove(login,"-1");
+            System.out.println("exit - " + login);
         } catch (Exception e) {
             e.printStackTrace();
         }

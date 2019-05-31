@@ -1,7 +1,6 @@
 package servlets.mainMenu;
 
-import database.CheckInformation;
-import database.UpdateInformation;
+import database.player.UpdateInfPlayer;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -30,11 +29,10 @@ public class servletUpdate extends HttpServlet {
         System.out.println("login: " + login);
 
         try {
-            UpdateInformation.updateI_Invite(login,-1);
-            UpdateInformation.updateMe_Invite(-1,login);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+            UpdateInfPlayer.updateI_Invite(login,-1);
+            UpdateInfPlayer.updateMe_Invite(-1,login);
+            UpdateInfPlayer.updatePlay(login,0);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         os.print("0");
