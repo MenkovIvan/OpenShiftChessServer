@@ -32,14 +32,8 @@ public class servletStartGame extends HttpServlet {
         System.out.println("  prinyl id1: " + id1);
         int id2 = Integer.parseInt(req.getParameter("id2"));
         System.out.println("  prinyl id2: " + id2);
-        String log = req.getParameter("log");
-        System.out.println("  prinyl log: " + log);
 
         try {
-            if (GetInfPlayer.getColor(id1).equals("light")){
-                AddMatchlog.main(CheckInfPlayer.idToName(id1),CheckInfPlayer.idToName(id2),log);
-            }
-            else AddMatchlog.main(CheckInfPlayer.idToName(id2),CheckInfPlayer.idToName(id1),log);
             String color = GetInfPlayer.getColor(id1);
             System.out.println("  res = " + color);
             os.print(color);

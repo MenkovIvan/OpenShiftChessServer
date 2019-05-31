@@ -1,5 +1,6 @@
 package servlets.mainMenu;
 
+import database.matchlog.AddMatchlog;
 import database.player.CheckInfPlayer;
 import database.player.GetInfPlayer;
 import database.player.UpdateInfPlayer;
@@ -42,6 +43,7 @@ public class servletCheckPlay extends HttpServlet {
                     UpdateInfPlayer.updateColor(login, "light");
                     System.out.println("  " + login);
                     System.out.println("  light");
+                    AddMatchlog.main(login,CheckInfPlayer.idToName(id));
                     os.print("1");
                 }
                 else os.print("0");
