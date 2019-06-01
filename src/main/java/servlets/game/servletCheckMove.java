@@ -32,11 +32,9 @@ public class servletCheckMove  extends HttpServlet {
 
 
         try {
-            if (GetInfPlayer.getPlay(CheckInfPlayer.nameToId(login)) == 0) {
+            if (GetInfPlayer.getPlay(CheckInfPlayer.nameToId(whoPlay)) == 0) {
                 os.print("-3");
-            }
-            else if( GetInfPlayer.getPlay(CheckInfPlayer.nameToId(login)) == 0 ||  GetInfPlayer.getPlay(CheckInfPlayer.nameToId(whoPlay)) == 0 ) {
-                os.print("-1");
+                System.out.println("-3");
             }
             else
             if (GetInfPlayer.getMove(CheckInfPlayer.nameToId(whoPlay)).equals("-1")){
