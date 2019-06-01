@@ -27,15 +27,17 @@ public class servletCheckUpdate extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletOutputStream os = resp.getOutputStream();
         String login = req.getParameter("login");
+        String whoPlay = req.getParameter("whoplay");
         System.out.println("servletCheckUpdate - start");
         System.out.println("login: " + login);
+        System.out.println("whoplay: " + whoPlay);
 
         try {
-            if (GetInfPlayer.getIInvite(CheckInfPlayer.nameToId(login))==0 &&  GetInfPlayer.getIInvite(GetInfPlayer.getMeInvite(CheckInfPlayer.nameToId(login)))==-1){
+            if (GetInfPlayer.getIInvite(CheckInfPlayer.nameToId(login))==0 &&  GetInfPlayer.getIInvite(CheckInfPlayer.nameToId(whoPlay))==-1 && GetInfPlayer.getMeInvite(CheckInfPlayer.nameToId(whoPlay))==-1){
                 os.print("1");
                 System.out.println("  1");
             }
-            else if (GetInfPlayer.getMeInvite(CheckInfPlayer.nameToId(login))==0 &&  GetInfPlayer.getIInvite(GetInfPlayer.getMeInvite(CheckInfPlayer.nameToId(login)))==-1){
+            else if (GetInfPlayer.getMeInvite(CheckInfPlayer.nameToId(login))==0 &&  GetInfPlayer.getIInvite(CheckInfPlayer.nameToId(whoPlay))==-1 && GetInfPlayer.getMeInvite(CheckInfPlayer.nameToId(whoPlay))==-1){
                 os.print("1");
                 System.out.println("  1");
             }
