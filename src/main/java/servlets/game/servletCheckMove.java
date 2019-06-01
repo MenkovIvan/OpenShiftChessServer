@@ -47,6 +47,10 @@ public class servletCheckMove  extends HttpServlet {
                 System.out.println("  " + login + " get from " + whoPlay + "  move = " + move);
                 System.out.println("servletCheckMove - end");
             }
+            if (GetInfPlayer.getPlay(CheckInfPlayer.nameToId(login))==0){
+                os.print("-3");
+            }
+            else os.print("0");
         } catch (Exception e) {
             e.printStackTrace();
         }

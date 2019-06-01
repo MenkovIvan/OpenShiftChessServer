@@ -51,6 +51,7 @@ public class servletMove extends HttpServlet {
                 UpdateInfMatchlog.updateLog(id_m,log + " " + move);
                 System.out.println(id_m + "// " + log + " " + move);
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
