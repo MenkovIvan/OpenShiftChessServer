@@ -32,7 +32,10 @@ public class servletCheckMove  extends HttpServlet {
 
 
         try {
-            if( GetInfPlayer.getPlay(CheckInfPlayer.nameToId(login)) == 0 ||  GetInfPlayer.getPlay(CheckInfPlayer.nameToId(whoPlay)) == 0 ) {
+            if (GetInfPlayer.getPlay(CheckInfPlayer.nameToId(login)) == 0) {
+                os.print("-3");
+            }
+            else if( GetInfPlayer.getPlay(CheckInfPlayer.nameToId(login)) == 0 ||  GetInfPlayer.getPlay(CheckInfPlayer.nameToId(whoPlay)) == 0 ) {
                 os.print("-1");
             }
             else
@@ -47,10 +50,7 @@ public class servletCheckMove  extends HttpServlet {
                 System.out.println("  " + login + " get from " + whoPlay + "  move = " + move);
                 System.out.println("servletCheckMove - end");
             }
-            if (GetInfPlayer.getPlay(CheckInfPlayer.nameToId(login))==0){
-                os.print("-3");
-            }
-            else os.print("0");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
