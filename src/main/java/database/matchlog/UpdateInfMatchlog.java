@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class UpdateInfMatchlog {
-    public static void updateLog(int id_m, String dark, String light, String log2) throws SQLException, ClassNotFoundException {
+    public static void updateLog(int id_m, String log2) throws SQLException, ClassNotFoundException {
 
         Connection connection = ConnectionMySQL.getMySQLConnection();
 

@@ -1,5 +1,7 @@
 package servlets.mainMenu;
 
+import database.player.CheckInfPlayer;
+import database.player.GetInfPlayer;
 import database.player.UpdateInfPlayer;
 
 import javax.servlet.ServletConfig;
@@ -10,10 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
-@WebServlet("/api/update")
-public class servletUpdate extends HttpServlet {
+@WebServlet("/api/checkupdate")
+public class servletCheckUpdate extends HttpServlet {
     public void init(ServletConfig servletConfig) {
         try {
             super.init(servletConfig);
@@ -26,16 +27,22 @@ public class servletUpdate extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletOutputStream os = resp.getOutputStream();
         String login = req.getParameter("login");
-        System.out.println("servletUpdate");
-        System.out.println("  login: " + login);
+        System.out.println("servletCheckUpdate - start");
+        System.out.println("login: " + login);
 
         try {
-            UpdateInfPlayer.updateI_Invite(login,-1);
-            UpdateInfPlayer.updateMe_Invite(-1,login);
-            UpdateInfPlayer.updatePlay(login,0);
+            if (GetInfPlayer.getIInvite(CheckInfPlayer.nameToId(login))==0 &&  GetInfPlayer.getIInvite(GetInfPlayer.getMeInvite(CheckInfPlayer.nameToId(login)))==-1){
+                os.print("1");
+                System.out.println("  1");
+            }
+            else if (GetInfPlayer.getMeInvite(CheckInfPlayer.nameToId(login))==0 &&  GetInfPlayer.getIInvite(GetInfPlayer.getMeInvite(CheckInfPlayer.nameToId(login)))==-1){
+                os.print("1");
+                System.out.println("  1");
+            }
+            else os.print("0");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        os.print("0");
+        System.out.println("servletCheckUpdate - end");
     }
 }

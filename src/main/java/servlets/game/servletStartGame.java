@@ -41,7 +41,6 @@ public class servletStartGame extends HttpServlet {
             e.printStackTrace();
         }
 
-        os.print("0");
         System.out.println("servletStartGame - end");
     }
 }

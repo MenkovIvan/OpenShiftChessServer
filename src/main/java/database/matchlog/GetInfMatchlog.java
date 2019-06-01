@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class GetInfMatchlog {
-    public static String getLastLog(int id_m, String dark, String light) throws SQLException, ClassNotFoundException {
+    public static String getLastLog(int id_m) throws SQLException, ClassNotFoundException {
 
         Connection connection = ConnectionMySQL.getMySQLConnection();
 
@@ -34,7 +34,7 @@ public class GetInfMatchlog {
 
         Statement statement = connection.createStatement();
 
-        String sql = "select MAX(id_m) from matchlog WHERE dark = '" + dark + "' AND light = '" + light + "'";
+        String sql = "select MAX(id_m) from matchlog WHERE dark ='" + dark + "' AND light ='" + light + "'";
 
         ResultSet rs = statement.executeQuery(sql);
 
@@ -42,7 +42,7 @@ public class GetInfMatchlog {
 
             //System.out.println("getPlay = " + rs.getInt("play"));
 
-            return rs.getInt("id_m");
+            return rs.getInt(1);
 
         } else return -1;
 
